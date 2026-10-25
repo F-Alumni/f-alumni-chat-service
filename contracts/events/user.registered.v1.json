@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.falumni.local/events/user.registered.v1.json",
+  "title": "UserRegisteredEventV1Envelope",
+  "description": "Standard Event Envelope for user.registered.v1 domain event in FPT Alumni Connect",
+  "type": "object",
+  "required": [
+    "eventId",
+    "eventType",
+    "version",
+    "occurredAt",
+    "correlationId",
+    "producer",
+    "data"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of this specific event instance (used for deduplication)."
+    },
+    "eventType": {
+      "type": "string",
+      "const": "user.registered.v1",
+      "description": "Type discriminator of the event."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic schema version, e.g. '1.0'."
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp when the event occurred."
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Distributed tracing correlation identifier."
+    },
+    "producer": {
+      "type": "string",
+      "description": "Name of the service that generated the event, e.g. 'f-alumni-user-service'."
+    },
+    "data": {
+      "type": "object",
+      "required": ["userId", "email", "fullName", "verificationCode", "registeredAt"],
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier of the registered user."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "FPT University email address of the user."
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full name of the registered user."
+        },
+        "verificationCode": {
+          "type": "string",
+          "description": "6-digit OTP verification code."
+        },
+        "registeredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the registration."
+        }
+      }
+    }
+  }
+}

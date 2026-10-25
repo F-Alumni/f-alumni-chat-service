@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: f-alumni-chat-service
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:8080
+      - key: UseInMemoryDatabase
+        value: "true"
+      - key: Jwt__Key
+        value: "falumni-production-shared-jwt-secret-key-2026-min-32-bytes"
+      - key: Jwt__Issuer
+        value: "https://identity.falumni.local"
+      - key: Jwt__Audience
+        value: "falumni-services"
+      - key: GrpcServices__UserProfile__Url
+        value: "https://f-alumni-user-service.onrender.com"
+      - key: GrpcServices__UserProfile__EnableDemoFallback
+        value: "true"

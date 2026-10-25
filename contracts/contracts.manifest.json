@@ -1,0 +1,46 @@
+﻿{
+    "manifestVersion":  "1.0",
+    "guidelineCommit":  "cc7420466e57b5e5a41472cfba51867c4956f9f8",
+    "importedAtUtc":  "2026-10-25T05:25:07Z",
+    "guidelineRepo":  "fpt-alumni-guideline",
+    "contracts":  {
+                      "grpc/user-profile/v1":  {
+                                                   "type":  "gRPC",
+                                                   "version":  "1.0",
+                                                   "description":  "Hop dong gRPC Protobuf tra cuu ho so nguoi dung (Chat Service -\u003e User Service)",
+                                                   "files":  [
+                                                                 {
+                                                                     "relativePath":  "grpc/user-profile/v1/user_profile.proto",
+                                                                     "sha256":  "4250F806307B82D2DEC6729EAA0F796FAC0AC90A9AE43F27340CE6961B43D64F"
+                                                                 },
+                                                                 {
+                                                                     "relativePath":  "grpc/user-profile/v1/README.md",
+                                                                     "sha256":  "8671BAB99FD10735F85911C027939B901257374DDB4F9A4CB9BE8F24C2EEB3ED"
+                                                                 }
+                                                             ]
+                                               },
+                      "events/user-registered/v1":  {
+                                                        "type":  "KafkaEvent",
+                                                        "version":  "1.0",
+                                                        "description":  "Hop dong su kien mien Kafka user.registered.v1 (User Service -\u003e Worker / Notification)",
+                                                        "files":  [
+                                                                      {
+                                                                          "relativePath":  "events/EventEnvelope.cs",
+                                                                          "sha256":  "DBC30CEC418316D63A1FE4D5DBB64A2682CE1484402A04B75DAC8F0B4AF5A397"
+                                                                      },
+                                                                      {
+                                                                          "relativePath":  "events/UserRegisteredEventV1.cs",
+                                                                          "sha256":  "7CF78A20067F6D965E7F2103674AE90D8F9F374046AD21DD2B608D61A307CB76"
+                                                                      },
+                                                                      {
+                                                                          "relativePath":  "events/user.registered.v1.json",
+                                                                          "sha256":  "7771D35965CE07252163E56A4D58F8906B55CED3690DD91B7F5BBFFEE19C6BA6"
+                                                                      },
+                                                                      {
+                                                                          "relativePath":  "events/README.md",
+                                                                          "sha256":  "153875EA6DAF6AD98C5C918DEA282D0D2A4C52865701FBA2EBB5F1FDBDA0FCF6"
+                                                                      }
+                                                                  ]
+                                                    }
+                  }
+}
