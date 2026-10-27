@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 980" width="100%" height="100%" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#34d399"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c084fc"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="980" fill="url(#bgGrad)" rx="16"/>
+
+  <!-- Header Banner -->
+  <rect x="30" y="20" width="1340" height="68" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="55" y="50" fill="#f8fafc" font-size="22" font-weight="700">FPT ALUMNI CONNECT — SYSTEM ARCHITECTURE DIAGRAM (.NET 10 MICROSERVICES)</text>
+  <text x="55" y="73" fill="#94a3b8" font-size="13">PRN232 Final Assignment | Designed by Trương Chí Trung (BE1) | 3-Layer Pattern • YARP Gateway • gRPC • SignalR • Apache Kafka • Isolated Databases</text>
+
+  <!-- 1. CLIENTS LAYER & PINGER BOT -->
+  <rect x="30" y="105" width="980" height="95" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-dasharray="6,4" stroke-width="1.5"/>
+  <text x="48" y="126" fill="#38bdf8" font-size="12" font-weight="700">1. CLIENT APPLICATIONS LAYER</text>
+
+  <rect x="60" y="136" width="280" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="200" y="158" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">Web Client (React 18 + Vite + TS)</text>
+  <text x="200" y="176" fill="#94a3b8" font-size="11" text-anchor="middle">REST HTTPS + SignalR WebSockets</text>
+
+  <rect x="380" y="136" width="280" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="520" y="158" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">Mobile App (Flutter Cross-Platform)</text>
+  <text x="520" y="176" fill="#94a3b8" font-size="11" text-anchor="middle">Alumni Directory • Chat • Mentorship</text>
+
+  <rect x="700" y="136" width="280" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="840" y="158" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">Admin Portal Dashboard</text>
+  <text x="840" y="176" fill="#94a3b8" font-size="11" text-anchor="middle">Moderation • User Suspend • Analytics</text>
+
+  <!-- Render 60s Pinger Bot -->
+  <rect x="1030" y="105" width="340" height="95" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-dasharray="6,4" stroke-width="1.5"/>
+  <text x="1048" y="126" fill="#fbbf24" font-size="12" font-weight="700">CLOUD KEEP-ALIVE (RENDER FREE TIER)</text>
+  <rect x="1050" y="136" width="300" height="50" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="1200" y="158" fill="#fde68a" font-size="14" font-weight="700" text-anchor="middle">60s Pinger Bot / Health Monitor</text>
+  <text x="1200" y="176" fill="#cbd5e1" font-size="11" text-anchor="middle">GET /ping &amp; /health every 60s (Zero Cold Start)</text>
+
+  <!-- 2. API GATEWAY LAYER -->
+  <rect x="30" y="230" width="1340" height="82" rx="10" fill="url(#blueGrad)" stroke="#60a5fa" stroke-width="2"/>
+  <text x="700" y="258" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">YARP API GATEWAY (REVERSE PROXY — SINGLE ENTRYPOINT :5000 / RENDER HTTPS)</text>
+  <text x="700" y="280" fill="#dbeafe" font-size="12" text-anchor="middle">Route Rewrite (/api/users/*, /api/chat/*, /api/forum/*, /api/ai/*, /api/admin/*) • JWT Pass-Through &amp; Validation • CORS • Correlation ID • SignalR WebSocket Proxy (/hubs/chat)</text>
+  <text x="700" y="299" fill="#93c5fd" font-size="11" text-anchor="middle">Health &amp; Wake-up: GET /health | GET /ping</text>
+
+  <!-- Arrows Clients -> Gateway -->
+  <line x1="200" y1="186" x2="200" y2="228" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="520" y1="186" x2="520" y2="228" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="840" y1="186" x2="840" y2="228" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="1200" y1="186" x2="1200" y2="228" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowOrange)"/>
+
+  <!-- 3. MICROSERVICES LAYER (.NET 10 3-LAYER ARCHITECTURE) -->
+  <rect x="30" y="345" width="1340" height="235" rx="12" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+  <text x="48" y="368" fill="#e2e8f0" font-size="13" font-weight="700">3. CORE MICROSERVICES LAYER (.NET 10 — 3-LAYER ARCHITECTURE: API -&gt; SERVICES -&gt; REPOSITORIES)</text>
+
+  <!-- Service 1: User Service (BE1) -->
+  <rect x="48" y="382" width="250" height="182" rx="10" fill="#1e293b" stroke="#f97316" stroke-width="2.5"/>
+  <rect x="48" y="382" width="250" height="32" rx="8" fill="url(#orangeGrad)"/>
+  <text x="173" y="403" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">USER SERVICE (BE1 - Chí Trung)</text>
+  <text x="60" y="432" fill="#fdba74" font-size="11" font-weight="700">REST API (/api/v1/auth, /api/v1/users):</text>
+  <text x="60" y="449" fill="#cbd5e1" font-size="11">• US-01..03: Register, OTP, Login, Google</text>
+  <text x="60" y="465" fill="#cbd5e1" font-size="11">• US-04..06: Profile, Avatar, Directory</text>
+  <text x="60" y="481" fill="#cbd5e1" font-size="11">• US-07..11: Password, Privacy, Block, Cal</text>
+  <text x="60" y="502" fill="#34d399" font-size="11" font-weight="700">gRPC Server (HTTP/2 Protobuf):</text>
+  <text x="60" y="518" fill="#cbd5e1" font-size="11">• UserProfileService.GetUserSummary</text>
+  <text x="60" y="538" fill="#c084fc" font-size="11" font-weight="700">Kafka Producer:</text>
+  <text x="60" y="554" fill="#cbd5e1" font-size="11">• user.registered.v1 | user.suspended.v1</text>
+
+  <!-- Service 2: Chat Service (BE1) -->
+  <rect x="332" y="382" width="250" height="182" rx="10" fill="#1e293b" stroke="#f97316" stroke-width="2.5"/>
+  <rect x="332" y="382" width="250" height="32" rx="8" fill="url(#orangeGrad)"/>
+  <text x="457" y="403" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">CHAT SERVICE (BE1 - Chí Trung)</text>
+  <text x="344" y="432" fill="#fdba74" font-size="11" font-weight="700">REST API &amp; SignalR (/hubs/chat):</text>
+  <text x="344" y="449" fill="#cbd5e1" font-size="11">• CH-01..03: 1-1 &amp; Group Conversations</text>
+  <text x="344" y="465" fill="#cbd5e1" font-size="11">• CH-04,08: Paged History &amp; Search</text>
+  <text x="344" y="481" fill="#cbd5e1" font-size="11">• CH-05..07,09: Read, Typing, Image, Mute</text>
+  <text x="344" y="502" fill="#34d399" font-size="11" font-weight="700">gRPC Client (CH-04):</text>
+  <text x="344" y="518" fill="#cbd5e1" font-size="11">• Calls UserProfileService (3s Deadline)</text>
+  <text x="344" y="538" fill="#c084fc" font-size="11" font-weight="700">Kafka Producer (CH-10):</text>
+  <text x="344" y="554" fill="#cbd5e1" font-size="11">• chat.message_sent.v1 (Push Noti)</text>
+
+  <!-- gRPC Arrow between Chat Service and User Service -->
+  <path d="M 332 510 L 298 510" stroke="#34d399" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  <rect x="299" y="486" width="32" height="18" rx="4" fill="#064e3b"/>
+  <text x="315" y="498" fill="#6ee7b7" font-size="9" font-weight="700" text-anchor="middle">gRPC</text>
+
+  <!-- Service 3: Forum Service (BE2) -->
+  <rect x="608" y="382" width="235" height="182" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="608" y="382" width="235" height="32" rx="8" fill="#0284c7"/>
+  <text x="725" y="403" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">FORUM SERVICE (BE2)</text>
+  <text x="620" y="435" fill="#7dd3fc" font-size="11" font-weight="700">REST API &amp; ForumHub:</text>
+  <text x="620" y="455" fill="#cbd5e1" font-size="11">• Posts, Comments, Upvotes</text>
+  <text x="620" y="473" fill="#cbd5e1" font-size="11">• Tags, Categories, Search</text>
+  <text x="620" y="491" fill="#cbd5e1" font-size="11">• Report Inappropriate Content</text>
+  <text x="620" y="518" fill="#c084fc" font-size="11" font-weight="700">Kafka Producer:</text>
+  <text x="620" y="536" fill="#cbd5e1" font-size="11">• post.created.v1</text>
+
+  <!-- Service 4: AI Service (BE2) -->
+  <rect x="860" y="382" width="235" height="182" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="860" y="382" width="235" height="32" rx="8" fill="#0284c7"/>
+  <text x="977" y="403" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">AI SERVICE (BE2)</text>
+  <text x="872" y="435" fill="#7dd3fc" font-size="11" font-weight="700">REST API (/api/v1/ai):</text>
+  <text x="872" y="455" fill="#cbd5e1" font-size="11">• Alumni Mentorship Matching</text>
+  <text x="872" y="473" fill="#cbd5e1" font-size="11">• Career Q&amp;A Assistant</text>
+  <text x="872" y="491" fill="#cbd5e1" font-size="11">• Profile Skill Extraction</text>
+  <text x="872" y="518" fill="#c084fc" font-size="11" font-weight="700">Kafka Consumer:</text>
+  <text x="872" y="536" fill="#cbd5e1" font-size="11">• Syncs Alumni Embeddings</text>
+
+  <!-- Service 5: Admin Service (Team Lead) -->
+  <rect x="1112" y="382" width="240" height="182" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="1112" y="382" width="240" height="32" rx="8" fill="#0284c7"/>
+  <text x="1232" y="403" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">ADMIN SERVICE (Team Lead)</text>
+  <text x="1124" y="435" fill="#7dd3fc" font-size="11" font-weight="700">REST API (/api/v1/admin):</text>
+  <text x="1124" y="455" fill="#cbd5e1" font-size="11">• System Dashboard &amp; Metrics</text>
+  <text x="1124" y="473" fill="#cbd5e1" font-size="11">• Moderation &amp; Audit Logs</text>
+  <text x="1124" y="491" fill="#cbd5e1" font-size="11">• Calls User Internal Suspend API</text>
+  <text x="1124" y="518" fill="#fbbf24" font-size="11" font-weight="700">Authorized Internal Call:</text>
+  <text x="1124" y="536" fill="#cbd5e1" font-size="11">• POST /internal/users/{id}/suspend</text>
+
+  <!-- Gateway -> Services Arrows -->
+  <line x1="173" y1="312" x2="173" y2="380" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="457" y1="312" x2="457" y2="380" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="725" y1="312" x2="725" y2="380" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="977" y1="312" x2="977" y2="380" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="1232" y1="312" x2="1232" y2="380" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- 4. DATABASE-PER-SERVICE LAYER (ZERO CROSS-DB ACCESS) -->
+  <rect x="30" y="610" width="1340" height="145" rx="12" fill="#0f172a" stroke="#10b981" stroke-dasharray="6,4" stroke-width="1.5"/>
+  <text x="48" y="633" fill="#34d399" font-size="13" font-weight="700">4. ISOLATED DATABASE-PER-SERVICE LAYER (SQL SERVER / EF CORE 10 — STRICTLY ZERO CROSS-DATABASE QUERIES OR FKs)</text>
+
+  <rect x="48" y="648" width="250" height="90" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+  <text x="173" y="670" fill="#ecfdf5" font-size="13" font-weight="700" text-anchor="middle">FAlumni_User_Db</text>
+  <text x="173" y="690" fill="#a7f3d0" font-size="11" text-anchor="middle">Tables: Users, RefreshTokens,</text>
+  <text x="173" y="706" fill="#a7f3d0" font-size="11" text-anchor="middle">EmailVerificationOtps, UserBlocks</text>
+  <text x="173" y="724" fill="#6ee7b7" font-size="10" text-anchor="middle">Owned exclusively by User Service</text>
+
+  <rect x="332" y="648" width="250" height="90" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+  <text x="457" y="670" fill="#ecfdf5" font-size="13" font-weight="700" text-anchor="middle">FAlumni_Chat_Db</text>
+  <text x="457" y="690" fill="#a7f3d0" font-size="11" text-anchor="middle">Tables: Conversations, Messages,</text>
+  <text x="457" y="706" fill="#a7f3d0" font-size="11" text-anchor="middle">ConversationParticipants (Scalar UserId)</text>
+  <text x="457" y="724" fill="#6ee7b7" font-size="10" text-anchor="middle">Owned exclusively by Chat Service</text>
+
+  <rect x="608" y="648" width="235" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="725" y="670" fill="#ecfdf5" font-size="13" font-weight="700" text-anchor="middle">FAlumni_Forum_Db</text>
+  <text x="725" y="692" fill="#cbd5e1" font-size="11" text-anchor="middle">Posts, Comments, Reactions,</text>
+  <text x="725" y="710" fill="#cbd5e1" font-size="11" text-anchor="middle">Tags (Scalar AuthorUserId)</text>
+
+  <rect x="860" y="648" width="235" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="977" y="670" fill="#ecfdf5" font-size="13" font-weight="700" text-anchor="middle">FAlumni_AI_Db</text>
+  <text x="977" y="692" fill="#cbd5e1" font-size="11" text-anchor="middle">MentorProfiles, SkillVectors,</text>
+  <text x="977" y="710" fill="#cbd5e1" font-size="11" text-anchor="middle">QaConversations</text>
+
+  <rect x="1112" y="648" width="240" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="1232" y="670" fill="#ecfdf5" font-size="13" font-weight="700" text-anchor="middle">FAlumni_Admin_Db</text>
+  <text x="1232" y="692" fill="#cbd5e1" font-size="11" text-anchor="middle">ModerationAuditLogs,</text>
+  <text x="1232" y="710" fill="#cbd5e1" font-size="11" text-anchor="middle">SystemReports</text>
+
+  <!-- Arrows Services -> Databases -->
+  <line x1="173" y1="564" x2="173" y2="646" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="457" y1="564" x2="457" y2="646" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="725" y1="564" x2="725" y2="646" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="977" y1="564" x2="977" y2="646" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="1232" y1="564" x2="1232" y2="646" stroke="#34d399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- 5. EVENT-DRIVEN KAFKA & BACKGROUND WORKER LAYER -->
+  <rect x="30" y="785" width="1340" height="165" rx="12" fill="#0f172a" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="48" y="808" fill="#c084fc" font-size="13" font-weight="700">5. ASYNCHRONOUS EVENT-DRIVEN MESSAGING &amp; BACKGROUND WORKER LAYER (APACHE KAFKA + .NET WORKER SERVICE)</text>
+
+  <rect x="55" y="825" width="620" height="105" rx="10" fill="url(#purpleGrad)" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="365" y="850" fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle">APACHE KAFKA MESSAGE BROKER (EventEnvelope&lt;T&gt; Contract)</text>
+  <text x="365" y="873" fill="#f3e8ff" font-size="12" text-anchor="middle">• Topic: user.registered.v1 (Producer: User Service -&gt; Consumer: Notification Worker)</text>
+  <text x="365" y="893" fill="#f3e8ff" font-size="12" text-anchor="middle">• Topic: user.suspended.v1 (Producer: User Service -&gt; Consumer: Notification Worker)</text>
+  <text x="365" y="913" fill="#f3e8ff" font-size="12" text-anchor="middle">• Topic: chat.message_sent.v1 (Producer: Chat Service -&gt; Consumer: Push Notification Worker)</text>
+
+  <rect x="740" y="825" width="320" height="105" rx="10" fill="#1e293b" stroke="#c084fc" stroke-width="1.5"/>
+  <text x="900" y="852" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">Notification Background Worker</text>
+  <text x="900" y="874" fill="#cbd5e1" font-size="11" text-anchor="middle">.NET 10 BackgroundService Consumer Group</text>
+  <text x="900" y="894" fill="#cbd5e1" font-size="11" text-anchor="middle">Idempotent Processing • Retry &amp; Dead-Letter</text>
+  <text x="900" y="914" fill="#a7f3d0" font-size="11" text-anchor="middle">Sends OTP Welcome Emails &amp; Chat Push Alerts</text>
+
+  <rect x="1115" y="825" width="230" height="105" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="1230" y="855" fill="#f8fafc" font-size="14" font-weight="700" text-anchor="middle">SMTP / Push Gateway</text>
+  <text x="1230" y="878" fill="#cbd5e1" font-size="11" text-anchor="middle">Gmail SMTP / SendGrid</text>
+  <text x="1230" y="898" fill="#cbd5e1" font-size="11" text-anchor="middle">Firebase / WebPush Notification</text>
+
+  <line x1="675" y1="877" x2="738" y2="877" stroke="#c084fc" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
+  <line x1="1060" y1="877" x2="1113" y2="877" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+</svg>

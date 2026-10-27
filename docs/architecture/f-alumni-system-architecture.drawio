@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" modified="2026-10-27T18:40:00.000Z" agent="Antigravity-BE1-ChiTrung" version="24.0.0" type="device">
+  <diagram id="falumni-arch-main" name="FPT Alumni Connect - System Architecture">
+    <mxGraphModel dx="1422" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="FPT ALUMNI CONNECT — SYSTEM ARCHITECTURE (.NET 10 MICROSERVICES)&#xa;Designed by Trương Chí Trung (BE1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#334155;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <!-- Clients -->
+        <mxCell id="webClient" value="Web Client&#xa;(React 18 + Vite + TS)&#xa;REST + SignalR WSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mobileClient" value="Mobile App&#xa;(Flutter Cross-Platform)&#xa;REST + SignalR WSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="110" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adminPortal" value="Admin Web Portal&#xa;(Moderation &amp; Dashboard)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="110" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pingerBot" value="Render 60s Pinger Bot&#xa;GET /ping &amp; /health every 60s&#xa;(Zero Cold Start)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="110" width="300" height="60" as="geometry" />
+        </mxCell>
+        <!-- API Gateway -->
+        <mxCell id="apiGateway" value="YARP API GATEWAY (Reverse Proxy :5000 / Render HTTPS)&#xa;Single Entrypoint • Route Rewrite (/api/users/*, /api/chat/*, /api/forum/*, /api/ai/*, /api/admin/*) • JWT Pass-through • SignalR Proxy (/hubs/chat)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d4ed8;strokeColor=#1e40af;fontColor=#ffffff;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="1440" height="70" as="geometry" />
+        </mxCell>
+        <!-- Services -->
+        <mxCell id="userSvc" value="USER SERVICE (BE1 - Chí Trung)&#xa;Port: 5001 / 8080&#xa;• Auth, OTP, Google OAuth, JWT&#xa;• Alumni Directory &amp; Privacy&#xa;• Block Users &amp; Calendar Link&#xa;• gRPC Server (UserProfileService)&#xa;• Kafka Producer (user.registered.v1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffedd5;strokeColor=#ea580c;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="270" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="chatSvc" value="CHAT SERVICE (BE1 - Chí Trung)&#xa;Port: 5002 / 8080&#xa;• 1-1 &amp; Group Conversations&#xa;• SignalR Real-time (/hubs/chat)&#xa;• Typing, Read Receipt, Attachments&#xa;• gRPC Client -&gt; User Service&#xa;• Kafka Producer (chat.message_sent.v1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffedd5;strokeColor=#ea580c;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="350" y="340" width="270" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="forumSvc" value="FORUM SERVICE (BE2 - Minh Triết)&#xa;Port: 5003 / 8080&#xa;• Posts, Comments, Reactions&#xa;• Tags &amp; Content Reports&#xa;• SignalR ForumHub&#xa;• Kafka Producer (post.created.v1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#475569;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="660" y="340" width="250" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="aiSvc" value="AI SERVICE (BE2 - Minh Triết)&#xa;Port: 5004 / 8080&#xa;• Alumni Mentorship Matching&#xa;• Career Q&amp;A Assistant&#xa;• Skill Recommendation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#475569;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="340" width="250" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="adminSvc" value="ADMIN SERVICE (Lead - Quang Tâm)&#xa;Port: 5005 / 8080&#xa;• Dashboard Statistics&#xa;• Content Moderation &amp; Audit&#xa;• Internal REST -&gt; Suspend User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#475569;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="340" width="260" height="170" as="geometry" />
+        </mxCell>
+        <!-- Databases -->
+        <mxCell id="userDb" value="FAlumni_User_Db&#xa;(SQL Server / EF Core 10)&#xa;Users, RefreshTokens, Otps, Blocks" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#d1fae5;strokeColor=#059669;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="75" y="570" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="chatDb" value="FAlumni_Chat_Db&#xa;(SQL Server / EF Core 10)&#xa;Conversations, Participants, Messages" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#d1fae5;strokeColor=#059669;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="385" y="570" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="forumDb" value="FAlumni_Forum_Db&#xa;Posts, Comments, Reactions" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#d1fae5;strokeColor=#059669;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="570" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiDb" value="FAlumni_AI_Db&#xa;MentorProfiles, MatchingLogs" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#d1fae5;strokeColor=#059669;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="965" y="570" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="adminDb" value="FAlumni_Admin_Db&#xa;AuditLogs, ModerationActions" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#d1fae5;strokeColor=#059669;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="570" width="200" height="90" as="geometry" />
+        </mxCell>
+        <!-- Kafka & Worker -->
+        <mxCell id="kafkaBroker" value="APACHE KAFKA MESSAGE BROKER (EventEnvelope&lt;T&gt;)&#xa;Topics: user.registered.v1 | user.suspended.v1 | chat.message_sent.v1 | post.created.v1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#7c3aed;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="880" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="notiWorker" value="NOTIFICATION BACKGROUND WORKER (.NET 10 Worker Service)&#xa;Kafka Consumer Group • Sends OTP Emails, Account Alerts &amp; Offline Chat Push Notifications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede9fe;strokeColor=#6d28d9;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="720" width="500" height="80" as="geometry" />
+        </mxCell>
+        <!-- Edges -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="webClient" target="apiGateway" />
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="mobileClient" target="apiGateway" />
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="adminPortal" target="apiGateway" />
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;strokeColor=#d97706;" edge="1" parent="1" source="pingerBot" target="apiGateway" />
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="apiGateway" target="userSvc" />
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="apiGateway" target="chatSvc" />
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="apiGateway" target="forumSvc" />
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="apiGateway" target="aiSvc" />
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="apiGateway" target="adminSvc" />
+        <mxCell id="grpcEdge" value="gRPC HTTP/2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#059669;fontStyle=1;" edge="1" parent="1" source="chatSvc" target="userSvc" />
+        <mxCell id="db1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;" edge="1" parent="1" source="userSvc" target="userDb" />
+        <mxCell id="db2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;" edge="1" parent="1" source="chatSvc" target="chatDb" />
+        <mxCell id="db3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;" edge="1" parent="1" source="forumSvc" target="forumDb" />
+        <mxCell id="db4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;" edge="1" parent="1" source="aiSvc" target="aiDb" />
+        <mxCell id="db5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;" edge="1" parent="1" source="adminSvc" target="adminDb" />
+        <mxCell id="k1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;strokeColor=#7c3aed;" edge="1" parent="1" source="userSvc" target="kafkaBroker" />
+        <mxCell id="k2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;dashed=1;strokeColor=#7c3aed;" edge="1" parent="1" source="chatSvc" target="kafkaBroker" />
+        <mxCell id="k3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#7c3aed;" edge="1" parent="1" source="kafkaBroker" target="notiWorker" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
