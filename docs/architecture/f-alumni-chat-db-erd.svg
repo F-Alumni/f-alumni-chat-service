@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 820" width="100%" height="100%" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGradChat" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="convHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="partHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="msgHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="extHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <marker id="arrowFK" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 2 L 10 6 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowGrpc" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 2 L 10 6 L 0 10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1360" height="820" fill="url(#bgGradChat)"/>
+
+  <!-- Title Banner -->
+  <rect x="30" y="24" width="1300" height="72" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="55" y="56" fill="#f8fafc" font-size="22" font-weight="700">ERD DATABASE — FPT ALUMNI CHAT SERVICE (FAlumni_Chat_Db)</text>
+  <text x="55" y="80" fill="#94a3b8" font-size="13">Owner: BE1 (Trương Chí Trung - chstrg2208) • SQL Server + EF Core 10 • Zero Cross-Database Foreign Keys (Scalar UserId + gRPC Lookup)</text>
+  <rect x="1055" y="42" width="250" height="36" rx="18" fill="#312e81" stroke="#6366f1" stroke-width="1"/>
+  <text x="1180" y="65" fill="#c7d2fe" font-size="13" font-weight="600" text-anchor="middle">SQL Server : 3 Core Tables</text>
+
+  <!-- Connectors -->
+  <!-- Conversations (1) -> (N) ConversationParticipants -->
+  <path d="M 480 230 L 820 230" stroke="#38bdf8" stroke-width="2.5" fill="none" marker-end="url(#arrowFK)"/>
+  <rect x="565" y="200" width="175" height="24" rx="6" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="1"/>
+  <text x="652" y="216" fill="#bae6fd" font-size="11" font-weight="600" text-anchor="middle">1 : N (Cascade Delete)</text>
+
+  <!-- Conversations (1) -> (N) Messages -->
+  <path d="M 480 340 L 650 340 L 650 560 L 820 560" stroke="#2dd4bf" stroke-width="2.5" fill="none" marker-end="url(#arrowFK)"/>
+  <rect x="565" y="440" width="175" height="24" rx="6" fill="#134e4a" stroke="#14b8a6" stroke-width="1"/>
+  <text x="652" y="456" fill="#99f6e4" font-size="11" font-weight="600" text-anchor="middle">1 : N (FK_Messages_ConvId)</text>
+
+  <!-- Scalar UserId -> gRPC User Service (Logical Reference, NO DB FK) -->
+  <path d="M 265 390 L 265 510" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,5" fill="none" marker-end="url(#arrowGrpc)"/>
+  <path d="M 820 310 L 560 310 L 560 595 L 480 595" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,5" fill="none" marker-end="url(#arrowGrpc)"/>
+
+  <!-- ================= TABLE 1: Conversations ================= -->
+  <g filter="url(#cardShadow)">
+    <rect x="50" y="140" width="430" height="250" rx="10" fill="#0f172a" stroke="#6366f1" stroke-width="2"/>
+    <rect x="50" y="140" width="430" height="42" rx="10" fill="url(#convHeader)"/>
+    <text x="70" y="167" fill="#ffffff" font-size="16" font-weight="700">Conversations</text>
+    <text x="460" y="166" fill="#e0e7ff" font-size="12" font-weight="600" text-anchor="end">1-1 &amp; Group Rooms (CH-01, CH-03)</text>
+
+    <g font-size="13" font-family="Consolas, monospace">
+      <text x="68" y="210" fill="#fbbf24" font-weight="700">PK</text>
+      <text x="120" y="210" fill="#f8fafc" font-weight="700">Id</text>
+      <text x="460" y="210" fill="#a5b4fc" text-anchor="end">uniqueidentifier NOT NULL</text>
+
+      <text x="120" y="242" fill="#f8fafc">Title</text>
+      <text x="460" y="242" fill="#94a3b8" text-anchor="end">nvarchar(200) NOT NULL</text>
+
+      <text x="120" y="274" fill="#f8fafc">IsGroup</text>
+      <text x="460" y="274" fill="#94a3b8" text-anchor="end">bit NOT NULL</text>
+
+      <text x="68" y="306" fill="#f59e0b" font-weight="700">SCALAR</text>
+      <text x="120" y="306" fill="#fde68a">CreatedByUserId</text>
+      <text x="460" y="306" fill="#fcd34d" text-anchor="end">uniqueidentifier (No FK)</text>
+
+      <text x="120" y="338" fill="#f8fafc">CreatedAtUtc</text>
+      <text x="460" y="338" fill="#94a3b8" text-anchor="end">datetime2 NOT NULL</text>
+
+      <text x="120" y="370" fill="#f8fafc">LastMessageAtUtc</text>
+      <text x="460" y="370" fill="#94a3b8" text-anchor="end">datetime2 NOT NULL</text>
+    </g>
+  </g>
+
+  <!-- ================= TABLE 2: ConversationParticipants ================= -->
+  <g filter="url(#cardShadow)">
+    <rect x="820" y="130" width="490" height="315" rx="10" fill="#0f172a" stroke="#0ea5e9" stroke-width="2"/>
+    <rect x="820" y="130" width="490" height="42" rx="10" fill="url(#partHeader)"/>
+    <text x="840" y="157" fill="#ffffff" font-size="16" font-weight="700">ConversationParticipants</text>
+    <text x="1290" y="156" fill="#e0f2fe" font-size="12" font-weight="600" text-anchor="end">Members &amp; Settings (CH-04, CH-09)</text>
+
+    <g font-size="13" font-family="Consolas, monospace">
+      <text x="838" y="198" fill="#fbbf24" font-weight="700">PK</text>
+      <text x="895" y="198" fill="#f8fafc" font-weight="700">Id</text>
+      <text x="1292" y="198" fill="#7dd3fc" text-anchor="end">uniqueidentifier NOT NULL</text>
+
+      <text x="838" y="228" fill="#38bdf8" font-weight="700">FK,UK1</text>
+      <text x="895" y="228" fill="#f8fafc" font-weight="700">ConversationId</text>
+      <text x="1292" y="228" fill="#7dd3fc" text-anchor="end">uniqueidentifier NOT NULL</text>
+
+      <text x="838" y="258" fill="#f59e0b" font-weight="700">UK2</text>
+      <text x="895" y="258" fill="#fde68a" font-weight="700">UserId</text>
+      <text x="1292" y="258" fill="#fcd34d" text-anchor="end">uniqueidentifier (Scalar ID)</text>
+
+      <text x="895" y="288" fill="#f8fafc">DisplayName</text>
+      <text x="1292" y="288" fill="#94a3b8" text-anchor="end">nvarchar(max) [Cached gRPC]</text>
+
+      <text x="895" y="318" fill="#f8fafc">AvatarUrl</text>
+      <text x="1292" y="318" fill="#94a3b8" text-anchor="end">nvarchar(max) [Cached gRPC]</text>
+
+      <text x="895" y="348" fill="#f8fafc">IsMuted</text>
+      <text x="1292" y="348" fill="#94a3b8" text-anchor="end">bit NOT NULL [CH-09 Mute]</text>
+
+      <text x="895" y="378" fill="#f8fafc">IsHidden</text>
+      <text x="1292" y="378" fill="#94a3b8" text-anchor="end">bit NOT NULL [CH-09 Hide]</text>
+
+      <text x="895" y="408" fill="#f8fafc">JoinedAtUtc</text>
+      <text x="1292" y="408" fill="#94a3b8" text-anchor="end">datetime2 NOT NULL</text>
+
+      <text x="895" y="434" fill="#cbd5e1">LastReadAtUtc</text>
+      <text x="1292" y="434" fill="#64748b" text-anchor="end">datetime2 NULL</text>
+    </g>
+  </g>
+
+  <!-- ================= TABLE 3: Messages ================= -->
+  <g filter="url(#cardShadow)">
+    <rect x="820" y="475" width="490" height="310" rx="10" fill="#0f172a" stroke="#14b8a6" stroke-width="2"/>
+    <rect x="820" y="475" width="490" height="42" rx="10" fill="url(#msgHeader)"/>
+    <text x="840" y="502" fill="#ffffff" font-size="16" font-weight="700">Messages (ChatMessage)</text>
+    <text x="1290" y="501" fill="#ccfbf1" font-size="12" font-weight="600" text-anchor="end">Real-time Messages &amp; Media (CH-02..CH-08)</text>
+
+    <g font-size="13" font-family="Consolas, monospace">
+      <text x="838" y="544" fill="#fbbf24" font-weight="700">PK</text>
+      <text x="895" y="544" fill="#f8fafc" font-weight="700">Id</text>
+      <text x="1292" y="544" fill="#5eead4" text-anchor="end">uniqueidentifier NOT NULL</text>
+
+      <text x="838" y="574" fill="#2dd4bf" font-weight="700">FK,IDX</text>
+      <text x="895" y="574" fill="#f8fafc" font-weight="700">ConversationId</text>
+      <text x="1292" y="574" fill="#5eead4" text-anchor="end">uniqueidentifier NOT NULL</text>
+
+      <text x="838" y="604" fill="#f59e0b" font-weight="700">SCALAR</text>
+      <text x="895" y="604" fill="#fde68a" font-weight="700">SenderId</text>
+      <text x="1292" y="604" fill="#fcd34d" text-anchor="end">uniqueidentifier (No FK)</text>
+
+      <text x="895" y="634" fill="#f8fafc">Content</text>
+      <text x="1292" y="634" fill="#94a3b8" text-anchor="end">nvarchar(4000) NOT NULL</text>
+
+      <text x="895" y="664" fill="#cbd5e1">AttachmentUrl</text>
+      <text x="1292" y="664" fill="#64748b" text-anchor="end">nvarchar(500) NULL [CH-07]</text>
+
+      <text x="895" y="694" fill="#cbd5e1">AttachmentType</text>
+      <text x="1292" y="694" fill="#64748b" text-anchor="end">nvarchar(100) NULL [CH-07]</text>
+
+      <text x="895" y="724" fill="#f8fafc">Status</text>
+      <text x="1292" y="724" fill="#94a3b8" text-anchor="end">nvarchar(30) DEFAULT 'Sent'</text>
+
+      <text x="895" y="752" fill="#f8fafc">CreatedAtUtc</text>
+      <text x="1292" y="752" fill="#94a3b8" text-anchor="end">datetime2 NOT NULL</text>
+
+      <text x="895" y="776" fill="#cbd5e1">ReadAtUtc</text>
+      <text x="1292" y="776" fill="#64748b" text-anchor="end">datetime2 NULL [CH-05]</text>
+    </g>
+  </g>
+
+  <!-- ================= EXTERNAL BOUNDARY BOX: gRPC User Service ================= -->
+  <g filter="url(#cardShadow)">
+    <rect x="50" y="510" width="430" height="175" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2" stroke-dasharray="8,4"/>
+    <rect x="50" y="510" width="430" height="38" rx="10" fill="url(#extHeader)"/>
+    <text x="70" y="534" fill="#fef3c7" font-size="14" font-weight="700">EXTERNAL SERVICE BOUNDARY (NO CROSS-DB FK)</text>
+    <text x="70" y="572" fill="#fde68a" font-size="13" font-weight="700">User Service (FAlumni_User_Db)</text>
+    <text x="70" y="598" fill="#cbd5e1" font-size="12">• CreatedByUserId, UserId, SenderId được lưu dạng Scalar Guid.</text>
+    <text x="70" y="620" fill="#cbd5e1" font-size="12">• Tuyệt đối KHÔNG tạo khóa ngoại SQL sang bảng Users.</text>
+    <text x="70" y="642" fill="#93c5fd" font-size="12">• Đồng bộ hồ sơ qua gRPC: UserProfileGrpc.GetUserProfile()</text>
+    <text x="70" y="664" fill="#86efac" font-size="12">• Phát sự kiện Kafka: chat.message_sent.v1 -> Notification Worker</text>
+  </g>
+
+  <!-- Footer Note -->
+  <rect x="50" y="710" width="730" height="75" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="70" y="736" fill="#f8fafc" font-size="13" font-weight="700">Ràng buộc Toàn vẹn &amp; Chỉ mục (Indexes) trên FAlumni_Chat_Db:</text>
+  <text x="70" y="758" fill="#cbd5e1" font-size="12">• IX_ConversationParticipants_ConversationId_UserId (UNIQUE): Chống trùng lặp thành viên trong 1 phòng chat.</text>
+  <text x="70" y="775" fill="#cbd5e1" font-size="12">• IX_Messages_ConversationId: Tối ưu truy vấn phân trang lịch sử tin nhắn (CH-04) &amp; tìm kiếm từ khóa (CH-08).</text>
+</svg>

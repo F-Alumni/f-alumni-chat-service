@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" modified="2026-10-28T06:45:00.000Z" agent="FPT-Alumni-BE1" version="24.0.0" type="device">
+  <diagram id="chat-db-erd" name="FAlumni_Chat_Db ERD">
+    <mxGraphModel dx="1422" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="ERD DATABASE — FPT ALUMNI CHAT SERVICE (FAlumni_Chat_Db) — BE1 Trương Chí Trung (Zero Cross-DB FK)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#6366f1;fontColor=#ffffff;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="conv" value="Conversations (CH-01, CH-03)&#xa;------------------------------------------------&#xa;PK      Id : uniqueidentifier NOT NULL&#xa;        Title : nvarchar(200) NOT NULL&#xa;        IsGroup : bit NOT NULL&#xa;SCALAR  CreatedByUserId : uniqueidentifier NOT NULL&#xa;        CreatedAtUtc : datetime2 NOT NULL&#xa;        LastMessageAtUtc : datetime2 NOT NULL" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fillColor=#0f172a;strokeColor=#6366f1;fontColor=#f8fafc;fontFamily=Courier New;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="440" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="part" value="ConversationParticipants (CH-04, CH-09)&#xa;-----------------------------------------------------&#xa;PK          Id : uniqueidentifier NOT NULL&#xa;FK,UK1      ConversationId : uniqueidentifier NOT NULL&#xa;SCALAR,UK2  UserId : uniqueidentifier NOT NULL&#xa;            DisplayName : nvarchar(max) NOT NULL&#xa;            AvatarUrl : nvarchar(max) NOT NULL&#xa;            IsMuted : bit NOT NULL [CH-09]&#xa;            IsHidden : bit NOT NULL [CH-09]&#xa;            JoinedAtUtc : datetime2 NOT NULL&#xa;            LastReadAtUtc : datetime2 NULL" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fillColor=#0f172a;strokeColor=#0ea5e9;fontColor=#f8fafc;fontFamily=Courier New;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="100" width="500" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="msg" value="Messages / ChatMessage (CH-02..CH-08)&#xa;-----------------------------------------------------&#xa;PK      Id : uniqueidentifier NOT NULL&#xa;FK,IDX  ConversationId : uniqueidentifier NOT NULL&#xa;SCALAR  SenderId : uniqueidentifier NOT NULL&#xa;        Content : nvarchar(4000) NOT NULL&#xa;        AttachmentUrl : nvarchar(500) NULL [CH-07]&#xa;        AttachmentType : nvarchar(100) NULL [CH-07]&#xa;        Status : nvarchar(30) DEFAULT 'Sent' [CH-05]&#xa;        CreatedAtUtc : datetime2 NOT NULL&#xa;        ReadAtUtc : datetime2 NULL [CH-05]" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fillColor=#0f172a;strokeColor=#14b8a6;fontColor=#f8fafc;fontFamily=Courier New;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="420" width="500" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ext" value="EXTERNAL SERVICE: User Service (FAlumni_User_Db)&#xa;------------------------------------------------&#xa;• Zero Cross-Database Foreign Keys!&#xa;• CreatedByUserId, UserId, SenderId are Scalar Guids.&#xa;• Profile details resolved via gRPC (user_profile.proto)." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;fillColor=#1e293b;strokeColor=#f59e0b;dashed=1;fontColor=#fde68a;fontFamily=Courier New;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="450" width="440" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1" value="1 : N (FK_ConversationParticipants_Conversations)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0ea5e9;strokeWidth=2;fontColor=#bae6fd;" edge="1" parent="1" source="conv" target="part">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2" value="1 : N (FK_Messages_Conversations)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#14b8a6;strokeWidth=2;fontColor=#99f6e4;" edge="1" parent="1" source="conv" target="msg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3" value="gRPC GetUserProfile (Scalar UserId)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#f59e0b;strokeWidth=2;dashed=1;fontColor=#fde68a;" edge="1" parent="1" source="part" target="ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

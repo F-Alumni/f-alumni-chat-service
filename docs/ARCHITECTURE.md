@@ -80,94 +80,50 @@ flowchart TB
 
 ---
 
-## 3. Sơ Đồ ERD Của `User Service` & `Chat Service` (Zero Cross-DB Foreign Keys)
+## 3. Sơ Đồ ERD Của `Chat Service` (`FAlumni_Chat_Db`) — Zero Cross-DB Foreign Keys
+
+- **Tài liệu ERD chi tiết**: [docs/ERD.md](ERD.md)
+- **File Vector SVG**: [docs/architecture/f-alumni-chat-db-erd.svg](architecture/f-alumni-chat-db-erd.svg)
+- **File Draw.io**: [docs/architecture/f-alumni-chat-db-erd.drawio](architecture/f-alumni-chat-db-erd.drawio)
+
+![ERD FAlumni_Chat_Db](architecture/f-alumni-chat-db-erd.svg)
 
 ```mermaid
 erDiagram
-    USERS ||--o{ REFRESH_TOKENS : "has"
-    USERS ||--o{ EMAIL_VERIFICATION_OTPS : "verifies"
-    USERS ||--o{ USER_BLOCKS : "blocks"
+    Conversations ||--o{ ConversationParticipants : "1:N (FK ConversationId, Cascade)"
+    Conversations ||--o{ Messages : "1:N (FK ConversationId, Cascade)"
 
-    USERS {
-        Guid Id PK
-        string Email UK
-        string PasswordHash
-        string FullName
-        string AvatarUrl
-        string Role "USER | ADMIN"
-        string Status "PendingVerification | Active | Suspended"
-        string Campus "FU-HCM | FU-HL | FU-DN | FU-CT | FU-QN"
-        string Major
-        int GraduationYear
-        string CurrentCompany
-        string JobTitle
-        string GoogleCalendarUrl "US-11 External Calendar Link"
-        bool ShowEmail "US-09 Privacy"
-        bool ShowPhoneNumber "US-09 Privacy"
-        bool ShowCompany "US-09 Privacy"
-        bool ShowCalendarUrl "US-09 Privacy"
-        DateTime CreatedAtUtc
+    Conversations {
+        uniqueidentifier Id PK
+        nvarchar_200 Title
+        bit IsGroup "1-1 or Group"
+        uniqueidentifier CreatedByUserId "Scalar Guid (No Cross-DB FK)"
+        datetime2 CreatedAtUtc
+        datetime2 LastMessageAtUtc
     }
 
-    REFRESH_TOKENS {
-        Guid Id PK
-        Guid UserId FK
-        string TokenHash UK
-        DateTime ExpiresAtUtc
-        bool IsRevoked
+    ConversationParticipants {
+        uniqueidentifier Id PK
+        uniqueidentifier ConversationId FK,UK
+        uniqueidentifier UserId UK "Scalar Guid -> Resolved via gRPC"
+        nvarchar_max DisplayName
+        nvarchar_max AvatarUrl
+        bit IsMuted "CH-09 Mute Notifications"
+        bit IsHidden "CH-09 Hide Conversation"
+        datetime2 JoinedAtUtc
+        datetime2 LastReadAtUtc
     }
 
-    EMAIL_VERIFICATION_OTPS {
-        Guid Id PK
-        Guid UserId FK
-        string Email
-        string Code "6-digit OTP"
-        string Purpose "EmailVerification | PasswordReset"
-        DateTime ExpiresAtUtc
-        bool IsUsed
-    }
-
-    USER_BLOCKS {
-        Guid Id PK
-        Guid BlockerUserId FK
-        Guid BlockedUserId "US-10 Blocked User"
-        DateTime CreatedAtUtc
-    }
-
-    CONVERSATIONS ||--o{ CONVERSATION_PARTICIPANTS : "contains"
-    CONVERSATIONS ||--o{ CHAT_MESSAGES : "has"
-
-    CONVERSATIONS {
-        Guid Id PK
-        string Title
-        bool IsGroup "1-1 or Group"
-        Guid CreatedByUserId "Scalar Guid (No Cross-DB FK)"
-        DateTime CreatedAtUtc
-        DateTime LastMessageAtUtc
-    }
-
-    CONVERSATION_PARTICIPANTS {
-        Guid Id PK
-        Guid ConversationId FK
-        Guid UserId "Scalar Guid -> Resolved via gRPC"
-        string DisplayName
-        string AvatarUrl
-        bool IsMuted "CH-09 Mute Notifications"
-        bool IsHidden "CH-09 Hide Conversation"
-        DateTime JoinedAtUtc
-        DateTime LastReadAtUtc
-    }
-
-    CHAT_MESSAGES {
-        Guid Id PK
-        Guid ConversationId FK
-        Guid SenderId "Scalar Guid (No Cross-DB FK)"
-        string Content
-        string AttachmentUrl "CH-07 Image/Attachment"
-        string AttachmentType "Image | File"
-        string Status "Sent | Delivered | Read (CH-05)"
-        DateTime CreatedAtUtc
-        DateTime ReadAtUtc
+    Messages {
+        uniqueidentifier Id PK
+        uniqueidentifier ConversationId FK
+        uniqueidentifier SenderId "Scalar Guid (No Cross-DB FK)"
+        nvarchar_4000 Content
+        nvarchar_500 AttachmentUrl "CH-07 Image/Attachment"
+        nvarchar_100 AttachmentType "Image | File"
+        nvarchar_30 Status "Sent | Delivered | Read (CH-05)"
+        datetime2 CreatedAtUtc
+        datetime2 ReadAtUtc
     }
 ```
 

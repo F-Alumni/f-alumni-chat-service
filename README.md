@@ -4,6 +4,16 @@ Dịch vụ Nhắn tin Thời gian thực (Real-time Messaging) thuộc hệ th�
 
 - **Owner**: Trương Chí Trung (`chstrg2208` — Backend 1)
 - **Database**: `FAlumni_ChatService_Db` (Zero Cross-DB FK — lưu `UserId` dạng `Guid` thuần túy và tra cứu qua gRPC)
+- **Tài liệu ERD Database**: [`docs/ERD.md`](docs/ERD.md) | [`docs/architecture/f-alumni-chat-db-erd.svg`](docs/architecture/f-alumni-chat-db-erd.svg) | [`docs/architecture/f-alumni-chat-db-erd.drawio`](docs/architecture/f-alumni-chat-db-erd.drawio)
+- **Tài liệu Kiến trúc Hệ thống**: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+
+---
+
+## 🗄️ Sơ Đồ ERD Cơ Sở Dữ Liệu (`FAlumni_Chat_Db`)
+
+![ERD FAlumni_Chat_Db](docs/architecture/f-alumni-chat-db-erd.svg)
+
+> Xem đặc tả chi tiết từng bảng, kiểu dữ liệu, khóa ngoại và chỉ mục tại [`docs/ERD.md`](docs/ERD.md).
 
 ---
 
