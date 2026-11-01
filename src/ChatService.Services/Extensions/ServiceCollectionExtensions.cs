@@ -19,10 +19,15 @@ public static class ServiceCollectionExtensions
         services.AddRepositories(configuration);
 
         // 2. Register gRPC Client for User Service Profile Lookup (CH-04)
-        var userGrpcUrl = configuration?["GrpcServices:UserProfile:Url"] ?? "http://localhost:5001";
+        // Supports both Docker Compose environment variable (GrpcServices__UserProfile__Address)
+        // and local/render config (GrpcServices__UserProfile__Url), defaulting to standard gRPC port 50051.
+        var userGrpcAddress = configuration?["GrpcServices:UserProfile:Address"]
+            ?? configuration?["GrpcServices:UserProfile:Url"]
+            ?? "http://localhost:50051";
+
         services.AddGrpcClient<UserProfileService.UserProfileServiceClient>(options =>
         {
-            options.Address = new Uri(userGrpcUrl);
+            options.Address = new Uri(userGrpcAddress);
         });
 
         // 3. Register Service layer dependencies

@@ -8,7 +8,7 @@ services:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: ASPNETCORE_URLS
-        value: http://+:8080
+        value: http://+:5002
       - key: UseInMemoryDatabase
         value: "true"
       - key: Jwt__Key

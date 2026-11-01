@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
+COPY contracts/ contracts/
 COPY ["ChatService.sln", "./"]
 COPY ["src/ChatService.Api/ChatService.Api.csproj", "src/ChatService.Api/"]
 COPY ["src/ChatService.Services/ChatService.Services.csproj", "src/ChatService.Services/"]
@@ -15,8 +16,8 @@ RUN dotnet publish "ChatService.Api.csproj" -c Release -o /app/publish /p:UseApp
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 5002
+ENV ASPNETCORE_URLS=http://+:5002
 ENV ASPNETCORE_ENVIRONMENT=Production
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "ChatService.Api.dll"]

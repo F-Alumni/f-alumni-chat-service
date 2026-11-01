@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ChatService.Services.DTOs.Common;
@@ -14,6 +14,7 @@ namespace ChatService.Api.Controllers;
 [ApiController]
 [Route("api/v1/sample-items")]
 [Produces("application/json")]
+[ApiExplorerSettings(IgnoreApi = true)]
 public class SampleItemsController : ControllerBase
 {
     private readonly ISampleItemService _sampleItemService;
