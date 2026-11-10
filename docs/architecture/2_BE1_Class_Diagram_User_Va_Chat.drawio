@@ -1,0 +1,300 @@
+<mxfile host="app.diagrams.net" modified="2026-11-10T10:25:00.000Z" agent="Draw.io" version="24.0.0" type="device">
+  <diagram id="be1-class" name="2. Class Diagram (User + Chat Service)">
+    <mxGraphModel dx="4650" dy="1420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="4650" pageHeight="1420" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u_outer" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="2360" height="1340" as="geometry" />
+        </mxCell>
+        <mxCell id="u_title" value="CLASS DIAGRAM: f-alumni-user-service (.NET 10 — 3-Layer Architecture: Api -&gt; Services -&gt; Repositories -&gt; Entities)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="32" width="1600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_api" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="75" width="2320" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_api_lbl" value="1. Presentation / API &amp; gRPC Layer (UserService.Api)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="80" width="600" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ctrl_auth" value="AuthController : ControllerBase" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="540" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ctrl_auth_body" value="- _authService : IAuthService&#xa;────────────────────────────────────────&#xa;+ Register(RegisterRequest) : Task&lt;ActionResult&lt;RegisterResponse&gt;&gt;&#xa;+ VerifyEmail(VerifyEmailRequest) : Task&lt;ActionResult&lt;AuthTokenResponse&gt;&gt;&#xa;+ Login(LoginRequest) : Task&lt;ActionResult&lt;AuthTokenResponse&gt;&gt;&#xa;+ GoogleLogin(GoogleLoginRequest) : Task&lt;ActionResult&lt;AuthTokenResponse&gt;&gt;&#xa;+ RefreshToken(RefreshTokenRequest) : Task&lt;ActionResult&lt;AuthTokenResponse&gt;&gt;&#xa;+ Logout(LogoutRequest?) : Task&lt;IActionResult&gt;&#xa;+ ChangePassword(ChangePasswordRequest) : Task&lt;IActionResult&gt;&#xa;+ ForgotPassword(ForgotPasswordRequest) : Task&lt;ActionResult&lt;RegisterResponse&gt;&gt;&#xa;+ ResetPassword(ResetPasswordRequest) : Task&lt;IActionResult&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ctrl_auth">
+          <mxGeometry y="30" width="540" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ctrl_users" value="UsersController : ControllerBase" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="650" y="110" width="580" height="245" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ctrl_users_body" value="- _userProfileService : IUserProfileAppService&#xa;────────────────────────────────────────&#xa;+ GetDirectory(search, campus, gradYear, major...) : Task&lt;ActionResult&lt;PagedResponse&gt;&gt;&#xa;+ GetMyProfile() : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;&#xa;+ UpdateMyProfile(UpdateUserProfileRequest) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;&#xa;+ UpdateMyAvatar(UpdateAvatarRequest) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;&#xa;+ UpdateMyCalendarLink(UpdateCalendarLinkRequest) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;&#xa;+ UpdateMyPrivacy(UpdatePrivacySettingsRequest) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;&#xa;+ GetMyBlockedUsers() : Task&lt;ActionResult&lt;IReadOnlyList&lt;BlockedUserResponse&gt;&gt;&gt;&#xa;+ BlockUser(Guid id, BlockUserRequest?) : Task&lt;ActionResult&lt;BlockedUserResponse&gt;&gt;&#xa;+ UnblockUser(Guid id) : Task&lt;IActionResult&gt;&#xa;+ GetUserById(Guid id) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ctrl_users">
+          <mxGeometry y="30" width="580" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ctrl_internal" value="InternalUsersController : ControllerBase" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="110" width="500" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ctrl_internal_body" value="- _userProfileService : IUserProfileAppService&#xa;────────────────────────────────────────&#xa;+ SuspendUser(Guid id, SuspendUserRequest) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;&#xa;+ UnsuspendUser(Guid id) : Task&lt;ActionResult&lt;UserProfileResponse&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ctrl_internal">
+          <mxGeometry y="30" width="500" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u_grpc_svc" value="UserProfileGrpcService : UserProfileServiceBase" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1830" y="110" width="510" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="u_grpc_svc_body" value="- _userProfileService : IUserProfileAppService&#xa;- _logger : ILogger&lt;UserProfileGrpcService&gt;&#xa;────────────────────────────────────────&#xa;+ GetUserSummary(GetUserSummaryRequest, ServerCallContext) : Task&lt;GetUserSummaryResponse&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_grpc_svc">
+          <mxGeometry y="30" width="510" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_svc" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="405" width="2320" height="295" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_svc_lbl" value="2. Business Logic / Application Services Layer (UserService.Services)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="410" width="700" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_auth" value="AuthService : IAuthService" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="440" width="540" height="245" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_auth_body" value="- _userRepository : IUserRepository&#xa;- _kafkaPublisher : IKafkaEventPublisher&#xa;- _configuration : IConfiguration&#xa;────────────────────────────────────────&#xa;+ RegisterAsync(RegisterRequest) : Task&lt;RegisterResponse&gt;&#xa;+ VerifyEmailAsync(VerifyEmailRequest) : Task&lt;AuthTokenResponse&gt;&#xa;+ LoginAsync(LoginRequest) : Task&lt;AuthTokenResponse&gt;&#xa;+ GoogleLoginAsync(GoogleLoginRequest) : Task&lt;AuthTokenResponse&gt;&#xa;+ RefreshTokenAsync(RefreshTokenRequest) : Task&lt;AuthTokenResponse&gt;&#xa;+ LogoutAsync(Guid userId, LogoutRequest?) : Task&#xa;+ ChangePasswordAsync(Guid userId, ChangePasswordRequest) : Task&#xa;+ ForgotPasswordAsync(ForgotPasswordRequest) : Task&lt;RegisterResponse&gt;&#xa;+ ResetPasswordAsync(ResetPasswordRequest) : Task" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_svc_auth">
+          <mxGeometry y="30" width="540" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_profile" value="UserProfileAppService : IUserProfileAppService" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="650" y="440" width="580" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_profile_body" value="- _userRepository : IUserRepository&#xa;- _kafkaPublisher : IKafkaEventPublisher&#xa;────────────────────────────────────────&#xa;+ GetByIdAsync(Guid userId, bool isOwnerOrAdmin) : Task&lt;UserProfileResponse&gt;&#xa;+ UpdateProfileAsync(Guid userId, UpdateUserProfileRequest) : Task&lt;UserProfileResponse&gt;&#xa;+ UpdateAvatarAsync(Guid userId, UpdateAvatarRequest) : Task&lt;UserProfileResponse&gt;&#xa;+ UpdateCalendarLinkAsync(Guid userId, UpdateCalendarLinkRequest) : Task&lt;UserProfileResponse&gt;&#xa;+ UpdatePrivacySettingsAsync(Guid userId, UpdatePrivacySettingsRequest) : Task&lt;UserProfileResponse&gt;&#xa;+ BlockUserAsync(Guid blockerId, Guid targetId, BlockUserRequest) : Task&lt;BlockedUserResponse&gt;&#xa;+ UnblockUserAsync(Guid blockerId, Guid targetId) : Task&#xa;+ GetDirectoryPagedAsync(...) : Task&lt;PagedResponse&lt;UserProfileResponse&gt;&gt;&#xa;+ SuspendUserAsync(Guid userId, SuspendUserRequest) : Task&lt;UserProfileResponse&gt;&#xa;+ UnsuspendUserAsync(Guid userId) : Task&lt;UserProfileResponse&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_svc_profile">
+          <mxGeometry y="30" width="580" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_kafka" value="KafkaEventPublisher : IKafkaEventPublisher" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="440" width="500" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_kafka_body" value="- _configuration : IConfiguration&#xa;- _logger : ILogger&lt;KafkaEventPublisher&gt;&#xa;────────────────────────────────────────&#xa;+ PublishAsync&lt;TPayload&gt;(string topic, string eventType, TPayload payload) : Task" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_svc_kafka">
+          <mxGeometry y="30" width="500" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_hasher" value="PasswordHasher &lt;&lt;static&gt;&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1830" y="440" width="510" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="u_svc_hasher_body" value="+ HashAlgorithm : PBKDF2-SHA256&#xa;────────────────────────────────────────&#xa;+ HashPassword(string password) : string&#xa;+ VerifyPassword(string password, string storedHash) : bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_svc_hasher">
+          <mxGeometry y="30" width="510" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_repo" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="740" width="2320" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_repo_lbl" value="3. Data Access / Repositories Layer (UserService.Repositories)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="745" width="700" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="u_repo_user" value="UserRepository : IUserRepository" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="775" width="580" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="u_repo_user_body" value="- _dbContext : UserServiceDbContext&#xa;────────────────────────────────────────&#xa;+ GetByIdAsync(Guid id) : Task&lt;User?&gt;&#xa;+ GetByEmailAsync(string email) : Task&lt;User?&gt;&#xa;+ CreateAsync(User user) : Task&lt;User&gt;&#xa;+ UpdateAsync(User user) : Task&lt;User&gt;&#xa;+ GetDirectoryPagedAsync(...) : Task&lt;(IReadOnlyList&lt;User&gt;, int)&gt;&#xa;+ CreateVerificationTokenAsync(VerificationToken) : Task&lt;VerificationToken&gt;&#xa;+ CreateRefreshTokenAsync(RefreshToken) : Task&lt;RefreshToken&gt;&#xa;+ RevokeAllUserRefreshTokensAsync(Guid userId) : Task&#xa;+ BlockUserAsync(Guid blockerId, Guid targetId, string reason) : Task&lt;BlockedUser&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_repo_user">
+          <mxGeometry y="30" width="580" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="u_db_ctx" value="UserServiceDbContext : DbContext" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="775" width="520" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="u_db_ctx_body" value="+ Users : DbSet&lt;User&gt;&#xa;+ UserProfiles : DbSet&lt;UserProfile&gt;&#xa;+ RefreshTokens : DbSet&lt;RefreshToken&gt;&#xa;+ VerificationTokens : DbSet&lt;VerificationToken&gt;&#xa;+ BlockedUsers : DbSet&lt;BlockedUser&gt;&#xa;────────────────────────────────────────&#xa;# OnModelCreating(ModelBuilder modelBuilder) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_db_ctx">
+          <mxGeometry y="30" width="520" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_ent" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1035" width="2320" height="305" as="geometry" />
+        </mxCell>
+        <mxCell id="u_layer_ent_lbl" value="4. Domain Entities Layer (UserService.Repositories.Entities — FAlumni_User_Db)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="1040" width="800" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_user" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1070" width="420" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_user_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ Email : string &lt;&lt;UK&gt;&gt;&#xa;+ PasswordHash : string&#xa;+ FullName : string&#xa;+ Role : string&#xa;+ AccountType : string&#xa;+ Status : string&#xa;+ EmailVerified : bool&#xa;+ SuspensionReason : string?&#xa;+ CreatedAtUtc : DateTime&#xa;+ UpdatedAtUtc : DateTime&#xa;────────────────────────────────────────&#xa;+ Profile : UserProfile?&#xa;+ RefreshTokens : ICollection&lt;RefreshToken&gt;&#xa;+ VerificationTokens : ICollection&lt;VerificationToken&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ent_user">
+          <mxGeometry y="30" width="420" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_profile" value="UserProfile" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="530" y="1070" width="430" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_profile_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ UserId : Guid &lt;&lt;FK, UK&gt;&gt;&#xa;+ DisplayName : string&#xa;+ AvatarUrl : string&#xa;+ StudentCode : string&#xa;+ Campus : string&#xa;+ GraduationYear : int?&#xa;+ Major : string&#xa;+ CurrentCompany : string&#xa;+ JobTitle : string&#xa;+ GoogleCalendarUrl : string&#xa;+ ShowEmailPublicly : bool&#xa;────────────────────────────────────────&#xa;+ User : User?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ent_profile">
+          <mxGeometry y="30" width="430" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_refresh" value="RefreshToken" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="1070" width="410" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_refresh_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ UserId : Guid &lt;&lt;FK&gt;&gt;&#xa;+ Token : string &lt;&lt;UK&gt;&gt;&#xa;+ ExpiresAtUtc : DateTime&#xa;+ IsRevoked : bool&#xa;+ CreatedAtUtc : DateTime&#xa;────────────────────────────────────────&#xa;+ User : User?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ent_refresh">
+          <mxGeometry y="30" width="410" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_verify" value="VerificationToken" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="1070" width="410" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_verify_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ UserId : Guid &lt;&lt;FK&gt;&gt;&#xa;+ OtpCode : string&#xa;+ Purpose : string&#xa;+ ExpiresAtUtc : DateTime&#xa;+ IsUsed : bool&#xa;+ CreatedAtUtc : DateTime&#xa;────────────────────────────────────────&#xa;+ User : User?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ent_verify">
+          <mxGeometry y="30" width="410" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_block" value="BlockedUser" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1930" y="1070" width="410" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="u_ent_block_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ BlockerUserId : Guid &lt;&lt;UK&gt;&gt;&#xa;+ BlockedTargetUserId : Guid &lt;&lt;UK&gt;&gt;&#xa;+ Reason : string&#xa;+ CreatedAtUtc : DateTime&#xa;────────────────────────────────────────&#xa;+ Blocker : Guid&#xa;+ Target : Guid" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="u_ent_block">
+          <mxGeometry y="30" width="410" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="u_e1" value="uses IAuthService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_ctrl_auth" target="u_svc_auth">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e2" value="uses IUserProfileAppService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_ctrl_users" target="u_svc_profile">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e3" value="uses IUserProfileAppService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_ctrl_internal" target="u_svc_profile">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1530" y="385" /><mxPoint x="1085" y="385" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e4" value="uses IUserProfileAppService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.9;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_grpc_svc" target="u_svc_profile">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="2085" y="375" /><mxPoint x="1172" y="375" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e5" value="publishes events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_svc_auth" target="u_svc_kafka">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="625" y="513" /><mxPoint x="625" y="425" /><mxPoint x="1255" y="425" /><mxPoint x="1255" y="485" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e6" value="publishes events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_svc_profile" target="u_svc_kafka">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e7" value="hashes/verifies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.15;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_svc_auth" target="u_svc_hasher">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="615" y="477" /><mxPoint x="615" y="395" /><mxPoint x="1805" y="395" /><mxPoint x="1805" y="515" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e8" value="uses IUserRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_svc_auth" target="u_repo_user">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="330" y="720" /><mxPoint x="474" y="720" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e9" value="uses IUserRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_svc_profile" target="u_repo_user">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="940" y="720" /><mxPoint x="706" y="720" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e10" value="queries/persists" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_repo_user" target="u_db_ctx">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e11" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_db_ctx" target="u_ent_user">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1198" y="1010" /><mxPoint x="270" y="1010" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e12" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_db_ctx" target="u_ent_profile">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1302" y="1020" /><mxPoint x="745" y="1020" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e13" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_db_ctx" target="u_ent_refresh">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1380" y="1020" /><mxPoint x="1215" y="1020" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e14" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_db_ctx" target="u_ent_verify">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1484" y="1020" /><mxPoint x="1675" y="1020" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="u_e15" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="u_db_ctx" target="u_ent_block">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1588" y="1010" /><mxPoint x="2135" y="1010" /></Array></mxGeometry>
+        </mxCell>
+      
+        <mxCell id="c_outer" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="2440" y="20" width="2160" height="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="c_title" value="CLASS DIAGRAM: f-alumni-chat-service (.NET 10 — 3-Layer Architecture + SignalR Hub + gRPC Client + Kafka)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2460" y="32" width="1650" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_api" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="2460" y="75" width="2120" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_api_lbl" value="1. Presentation / REST API &amp; Real-time SignalR Hub Layer (ChatService.Api)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2475" y="80" width="750" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ctrl_chats" value="ChatsController : ControllerBase" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="2520" y="110" width="660" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ctrl_chats_body" value="- _chatAppService : IChatAppService&#xa;- _profileLookupService : IUserProfileLookupService&#xa;- _hubContext : IHubContext&lt;ChatHub&gt;&#xa;- _configuration : IConfiguration&#xa;────────────────────────────────────────&#xa;+ GetParticipantProfile(Guid convId, Guid userId) : Task&lt;IActionResult&gt;&#xa;+ CreateConversation(CreateConversationRequest, Guid? userId) : Task&lt;IActionResult&gt;&#xa;+ GetConversations(Guid? userId, bool includeHidden, int page, int size) : Task&lt;IActionResult&gt;&#xa;+ GetConversationById(Guid conversationId) : Task&lt;IActionResult&gt;&#xa;+ GetMessages(Guid convId, string? search, int page, int size) : Task&lt;IActionResult&gt;&#xa;+ SendMessage(Guid convId, SendMessageRequest, Guid? userId) : Task&lt;IActionResult&gt;&#xa;+ MarkConversationRead(Guid convId, MarkReadRequest?) : Task&lt;IActionResult&gt;&#xa;+ UpdateConversationSettings(Guid convId, UpdateConversationSettingsRequest) : Task&lt;IActionResult&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_ctrl_chats">
+          <mxGeometry y="30" width="660" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="c_hub_chat" value="ChatHub : Hub (/hubs/chat)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3440" y="110" width="580" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="c_hub_chat_body" value="- _chatAppService : IChatAppService&#xa;- _logger : ILogger&lt;ChatHub&gt;&#xa;────────────────────────────────────────&#xa;+ OnConnectedAsync() : Task&#xa;+ JoinConversation(Guid conversationId) : Task&#xa;+ LeaveConversation(Guid conversationId) : Task&#xa;+ SendMessage(Guid conversationId, SendMessageRequest) : Task&#xa;+ SendTypingIndicator(Guid conversationId, bool isTyping) : Task&#xa;+ MarkConversationRead(Guid conversationId) : Task&#xa;+ GetConversationGroupName(Guid conversationId) : string &lt;&lt;static&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_hub_chat">
+          <mxGeometry y="30" width="580" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_svc" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="2460" y="390" width="2120" height="265" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_svc_lbl" value="2. Business Logic / Application Services Layer (ChatService.Services)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2475" y="395" width="750" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c_svc_app" value="ChatAppService : IChatAppService" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="2500" y="425" width="680" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="c_svc_app_body" value="- _chatRepository : IChatRepository&#xa;- _profileLookupService : IUserProfileLookupService&#xa;- _kafkaPublisher : IChatKafkaPublisher&#xa;────────────────────────────────────────&#xa;+ CreateOrGetConversationAsync(Guid creatorId, CreateConversationRequest) : Task&lt;ConversationResponse&gt;&#xa;+ GetConversationByIdAsync(Guid conversationId) : Task&lt;ConversationResponse?&gt;&#xa;+ GetUserConversationsAsync(Guid userId, bool includeHidden, int page, int size) : Task&lt;PagedResponse&gt;&#xa;+ SendMessageAsync(Guid convId, Guid senderId, SendMessageRequest) : Task&lt;ChatMessageResponse&gt;&#xa;+ GetMessagesAsync(Guid convId, string? search, int page, int size) : Task&lt;PagedResponse&gt;&#xa;+ MarkConversationReadAsync(Guid convId, Guid readerId) : Task&lt;MarkReadResponse&gt;&#xa;+ UpdateConversationSettingsAsync(Guid convId, Guid userId, UpdateSettingsRequest) : Task&lt;ParticipantDto?&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_svc_app">
+          <mxGeometry y="30" width="680" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="c_svc_lookup" value="UserProfileLookupService : IUserProfileLookupService" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3250" y="425" width="640" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="c_svc_lookup_body" value="- _grpcClient : UserProfileService.UserProfileServiceClient&#xa;- _configuration : IConfiguration&#xa;- _logger : ILogger&lt;UserProfileLookupService&gt;&#xa;────────────────────────────────────────&#xa;+ GetParticipantSummaryAsync(Guid convId, Guid userId, bool strictGrpc) : Task&lt;ConversationParticipantResponse&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_svc_lookup">
+          <mxGeometry y="30" width="640" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="c_svc_kafka" value="ChatKafkaPublisher : IChatKafkaPublisher" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3960" y="425" width="580" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="c_svc_kafka_body" value="- _configuration : IConfiguration&#xa;- _logger : ILogger&lt;ChatKafkaPublisher&gt;&#xa;────────────────────────────────────────&#xa;+ PublishMessageSentAsync(ChatMessageResponse msg, IEnumerable&lt;Guid&gt; recipientIds) : Task" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_svc_kafka">
+          <mxGeometry y="30" width="580" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_repo" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="2460" y="695" width="2120" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_repo_lbl" value="3. Data Access / Repositories Layer (ChatService.Repositories)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2475" y="700" width="750" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c_repo_chat" value="ChatRepository : IChatRepository" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="2600" y="730" width="680" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="c_repo_chat_body" value="- _dbContext : ChatServiceDbContext&#xa;────────────────────────────────────────&#xa;+ GetConversationByIdAsync(Guid conversationId) : Task&lt;Conversation?&gt;&#xa;+ GetDirectConversationAsync(Guid userAId, Guid userBId) : Task&lt;Conversation?&gt;&#xa;+ CreateConversationAsync(Conversation conversation) : Task&lt;Conversation&gt;&#xa;+ GetUserConversationsAsync(Guid userId, bool includeHidden) : Task&lt;IReadOnlyList&lt;Conversation&gt;&gt;&#xa;+ GetParticipantAsync(Guid conversationId, Guid userId) : Task&lt;ConversationParticipant?&gt;&#xa;+ UpdateParticipantAsync(ConversationParticipant participant) : Task&#xa;+ AddMessageAsync(ChatMessage message) : Task&lt;ChatMessage&gt;&#xa;+ GetMessagesPagedAsync(Guid convId, string? search, int page, int size) : Task&lt;(IReadOnlyList&lt;ChatMessage&gt;, int)&gt;&#xa;+ MarkMessagesAsReadAsync(Guid conversationId, Guid readerUserId) : Task&lt;int&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_repo_chat">
+          <mxGeometry y="30" width="680" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="c_db_ctx" value="ChatServiceDbContext : DbContext" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3480" y="730" width="520" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="c_db_ctx_body" value="+ Conversations : DbSet&lt;Conversation&gt;&#xa;+ ConversationParticipants : DbSet&lt;ConversationParticipant&gt;&#xa;+ Messages : DbSet&lt;ChatMessage&gt;&#xa;────────────────────────────────────────&#xa;# OnModelCreating(ModelBuilder modelBuilder) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_db_ctx">
+          <mxGeometry y="30" width="520" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_ent" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="2460" y="990" width="2120" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="c_layer_ent_lbl" value="4. Domain Entities Layer (ChatService.Repositories.Entities — FAlumni_Chat_Db, Zero Cross-DB FK)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2475" y="995" width="850" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ent_conv" value="Conversation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="2540" y="1030" width="500" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ent_conv_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ Title : string&#xa;+ IsGroup : bool&#xa;+ CreatedByUserId : Guid (Scalar — No FK)&#xa;+ CreatedAtUtc : DateTime&#xa;+ LastMessageAtUtc : DateTime&#xa;────────────────────────────────────────&#xa;+ Participants : ICollection&lt;ConversationParticipant&gt;&#xa;+ Messages : ICollection&lt;ChatMessage&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_ent_conv">
+          <mxGeometry y="30" width="500" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ent_part" value="ConversationParticipant" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3200" y="1030" width="540" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ent_part_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ ConversationId : Guid &lt;&lt;FK, UK&gt;&gt;&#xa;+ UserId : Guid &lt;&lt;UK&gt;&gt; (Scalar — Resolved via gRPC)&#xa;+ DisplayName : string&#xa;+ AvatarUrl : string&#xa;+ IsMuted : bool&#xa;+ IsHidden : bool&#xa;+ JoinedAtUtc : DateTime&#xa;+ LastReadAtUtc : DateTime?&#xa;────────────────────────────────────────&#xa;+ Conversation : Conversation?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_ent_part">
+          <mxGeometry y="30" width="540" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ent_msg" value="ChatMessage (Table: Messages)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="3900" y="1030" width="540" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ent_msg_body" value="+ Id : Guid &lt;&lt;PK&gt;&gt;&#xa;+ ConversationId : Guid &lt;&lt;FK&gt;&gt;&#xa;+ SenderId : Guid (Scalar — No Cross-DB FK)&#xa;+ Content : string&#xa;+ AttachmentUrl : string?&#xa;+ AttachmentType : string?&#xa;+ Status : string (Sent | Delivered | Read)&#xa;+ CreatedAtUtc : DateTime&#xa;+ ReadAtUtc : DateTime?&#xa;────────────────────────────────────────&#xa;+ Conversation : Conversation?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=11.5;fontColor=#000000;" vertex="1" parent="c_ent_msg">
+          <mxGeometry y="30" width="540" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="c_e1" value="uses IChatAppService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.4;exitY=1;exitDx=0;exitDy=0;entryX=0.4;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_ctrl_chats" target="c_svc_app">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e2" value="uses IUserProfileLookupService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_ctrl_chats" target="c_svc_lookup">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="3081" y="365" /><mxPoint x="3410" y="365" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e3" value="broadcasts via IHubContext&lt;ChatHub&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_ctrl_chats" target="c_hub_chat">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e4" value="uses IChatAppService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_hub_chat" target="c_svc_app">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="3614" y="375" /><mxPoint x="3044" y="375" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e5" value="resolves profile via gRPC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_svc_app" target="c_svc_lookup">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e6" value="publishes chat.message_sent.v1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_svc_app" target="c_svc_kafka">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="3210" y="575" /><mxPoint x="3210" y="615" /><mxPoint x="3930" y="615" /><mxPoint x="3930" y="540" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e7" value="uses IChatRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.4;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;dashed=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_svc_app" target="c_repo_chat">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e8" value="queries/persists" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_repo_chat" target="c_db_ctx">
+          <mxGeometry relative="1" as="geometry"></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e9" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_db_ctx" target="c_ent_conv">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="3584" y="955" /><mxPoint x="2790" y="955" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e10" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_db_ctx" target="c_ent_part">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="3740" y="965" /><mxPoint x="3470" y="965" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="c_e11" value="1:N DbSet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;startArrow=none;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c_db_ctx" target="c_ent_msg">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="3896" y="955" /><mxPoint x="4170" y="955" /></Array></mxGeometry>
+        </mxCell>
+      
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net" modified="2026-11-10T10:25:00.000Z" agent="Draw.io" version="24.0.0" type="device">
+  <diagram id="be1-erd" name="1. ERD (User DB + Chat DB)">
+    <mxGraphModel dx="2200" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2200" pageHeight="950" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== SECTION 1: USER SERVICE DB ==================== -->
+        <mxCell id="box_user_db" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1080" height="840" as="geometry" />
+        </mxCell>
+        <mxCell id="title_user" value="1. ERD: FAlumni_User_Db (User Service)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="35" width="500" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_users" value="Users" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="90" width="380" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_users_cols" value="+ PK  Id : uniqueidentifier NOT NULL&#xa;+ UK  Email : nvarchar(150) NOT NULL&#xa;+     PasswordHash : nvarchar(500) NOT NULL&#xa;+     FullName : nvarchar(150) NOT NULL&#xa;+     Role : nvarchar(30) NOT NULL&#xa;+     AccountType : nvarchar(30) NOT NULL&#xa;+     Status : nvarchar(40) NOT NULL&#xa;+     EmailVerified : bit NOT NULL&#xa;+     SuspensionReason : nvarchar(500) NULL&#xa;+     CreatedAtUtc : datetime2 NOT NULL&#xa;+     UpdatedAtUtc : datetime2 NOT NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_users">
+          <mxGeometry y="30" width="380" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_profiles" value="UserProfiles" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="640" y="90" width="420" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_profiles_cols" value="+ PK     Id : uniqueidentifier NOT NULL&#xa;+ FK,UK  UserId : uniqueidentifier NOT NULL&#xa;+        DisplayName : nvarchar(150) NOT NULL&#xa;+        AvatarUrl : nvarchar(500) NOT NULL&#xa;+        StudentCode : nvarchar(30) NOT NULL&#xa;+        Campus : nvarchar(50) NOT NULL&#xa;+        GraduationYear : int NULL&#xa;+        Major : nvarchar(100) NOT NULL&#xa;+        CurrentCompany : nvarchar(150) NOT NULL&#xa;+        JobTitle : nvarchar(150) NOT NULL&#xa;+        Bio : nvarchar(1000) NOT NULL&#xa;+        Skills : nvarchar(500) NOT NULL&#xa;+        LinkedInUrl : nvarchar(300) NOT NULL&#xa;+        GitHubUrl : nvarchar(300) NOT NULL&#xa;+        PhoneNumber : nvarchar(30) NOT NULL&#xa;+        GoogleCalendarUrl : nvarchar(500) NOT NULL&#xa;+        ShowEmailPublicly : bit NOT NULL&#xa;+        ShowPhonePublicly : bit NOT NULL&#xa;+        ShowCompanyPublicly : bit NOT NULL&#xa;+        ShowCalendarPublicly : bit NOT NULL&#xa;+        UpdatedAtUtc : datetime2 NOT NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_profiles">
+          <mxGeometry y="30" width="420" height="390" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_refresh" value="RefreshTokens" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="430" width="380" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_refresh_cols" value="+ PK  Id : uniqueidentifier NOT NULL&#xa;+ FK  UserId : uniqueidentifier NOT NULL&#xa;+ UK  Token : nvarchar(250) NOT NULL&#xa;+     ExpiresAtUtc : datetime2 NOT NULL&#xa;+     IsRevoked : bit NOT NULL&#xa;+     CreatedAtUtc : datetime2 NOT NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_refresh">
+          <mxGeometry y="30" width="380" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_verify" value="VerificationTokens" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="650" width="380" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_verify_cols" value="+ PK  Id : uniqueidentifier NOT NULL&#xa;+ FK  UserId : uniqueidentifier NOT NULL&#xa;+     OtpCode : nvarchar(20) NOT NULL&#xa;+     Purpose : nvarchar(40) NOT NULL&#xa;+     ExpiresAtUtc : datetime2 NOT NULL&#xa;+     IsUsed : bit NOT NULL&#xa;+     CreatedAtUtc : datetime2 NOT NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_verify">
+          <mxGeometry y="30" width="380" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_blocks" value="BlockedUsers" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="640" y="580" width="420" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_blocks_cols" value="+ PK   Id : uniqueidentifier NOT NULL&#xa;+ FK   BlockerUserId : uniqueidentifier NOT NULL&#xa;+ FK   BlockedTargetUserId : uniqueidentifier NOT NULL&#xa;+      Reason : nvarchar(300) NOT NULL&#xa;+      CreatedAtUtc : datetime2 NOT NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_blocks">
+          <mxGeometry y="30" width="420" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Edges for User Service (100% orthogonal, no overlap) -->
+        <mxCell id="rel_user_profile" value="1:1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.16;entryDx=0;entryDy=0;endArrow=ERmandOne;startArrow=ERmandOne;strokeColor=#000000;fontColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tbl_users" target="tbl_profiles">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="158" />
+              <mxPoint x="550" y="158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_user_refresh" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=ERzeroToMany;startArrow=ERmandOne;strokeColor=#000000;fontColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tbl_users" target="tbl_refresh">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_user_verify" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERzeroToMany;startArrow=ERmandOne;strokeColor=#000000;fontColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tbl_users" target="tbl_verify">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="40" y="293" />
+              <mxPoint x="40" y="745" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_user_blocks" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERzeroToMany;startArrow=ERmandOne;strokeColor=#000000;fontColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tbl_users" target="tbl_blocks">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="293" />
+              <mxPoint x="550" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== SECTION 2: CHAT SERVICE DB ==================== -->
+        <mxCell id="box_chat_db" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="20" width="1040" height="840" as="geometry" />
+        </mxCell>
+        <mxCell id="title_chat" value="2. ERD: FAlumni_Chat_Db (Chat Service — Zero Cross-DB FK)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="35" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_conv" value="Conversations" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="250" width="400" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_conv_cols" value="+ PK  Id : uniqueidentifier NOT NULL&#xa;+     Title : nvarchar(200) NOT NULL&#xa;+     IsGroup : bit NOT NULL&#xa;+     CreatedByUserId : uniqueidentifier NOT NULL&#xa;+     CreatedAtUtc : datetime2 NOT NULL&#xa;+     LastMessageAtUtc : datetime2 NOT NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_conv">
+          <mxGeometry y="30" width="400" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_part" value="ConversationParticipants" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="110" width="440" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_part_cols" value="+ PK     Id : uniqueidentifier NOT NULL&#xa;+ FK,UK  ConversationId : uniqueidentifier NOT NULL&#xa;+ UK     UserId : uniqueidentifier NOT NULL (Scalar)&#xa;+        DisplayName : nvarchar(max) NOT NULL&#xa;+        AvatarUrl : nvarchar(max) NOT NULL&#xa;+        IsMuted : bit NOT NULL&#xa;+        IsHidden : bit NOT NULL&#xa;+        JoinedAtUtc : datetime2 NOT NULL&#xa;+        LastReadAtUtc : datetime2 NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_part">
+          <mxGeometry y="30" width="440" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tbl_msg" value="Messages (ChatMessage)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="420" width="440" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_msg_cols" value="+ PK  Id : uniqueidentifier NOT NULL&#xa;+ FK  ConversationId : uniqueidentifier NOT NULL&#xa;+     SenderId : uniqueidentifier NOT NULL (Scalar)&#xa;+     Content : nvarchar(4000) NOT NULL&#xa;+     AttachmentUrl : nvarchar(500) NULL&#xa;+     AttachmentType : nvarchar(100) NULL&#xa;+     Status : nvarchar(30) NOT NULL&#xa;+     CreatedAtUtc : datetime2 NOT NULL&#xa;+     ReadAtUtc : datetime2 NULL" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;fontFamily=Courier New;fontSize=12;fontColor=#000000;" vertex="1" parent="tbl_msg">
+          <mxGeometry y="30" width="440" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Edges for Chat Service -->
+        <mxCell id="rel_conv_part" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERzeroToMany;startArrow=ERmandOne;strokeColor=#000000;fontColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tbl_conv" target="tbl_part">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1640" y="310" />
+              <mxPoint x="1640" y="225" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_conv_msg" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERzeroToMany;startArrow=ERmandOne;strokeColor=#000000;fontColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="tbl_conv" target="tbl_msg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1640" y="369" />
+              <mxPoint x="1640" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  
+  </diagram>
+</mxfile>
