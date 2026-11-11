@@ -88,7 +88,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequireUserRole", policy => policy.RequireRole("USER", "ADMIN"));
+    options.AddPolicy("RequireUserRole", policy => policy.RequireRole("USER", "ALUMNI", "STUDENT", "ADMIN"));
+    options.AddPolicy("RequireAlumniRole", policy => policy.RequireRole("ALUMNI", "ADMIN"));
+    options.AddPolicy("RequireStudentRole", policy => policy.RequireRole("STUDENT", "ADMIN"));
     options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("ADMIN"));
 });
 

@@ -76,10 +76,10 @@
         <mxCell id="useq_seq_blk_0" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=1;dashed=1;" vertex="1" parent="1">
           <mxGeometry x="40" y="150" width="2160" height="315" as="geometry" />
         </mxCell>
-        <mxCell id="useq_seq_blk_lbl_0" value="Flow 1: US-02 &amp; US-03 — Đăng ký Tài khoản, Phát sự kiện OTP qua Kafka &amp; Xác thực Email OTP" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="1">
+        <mxCell id="useq_seq_blk_lbl_0" value="Flow 1: US-02 &amp; US-03 — Đăng ký (Tách Role ALUMNI / STUDENT), Gửi OTP qua Gmail SMTP + Kafka &amp; Xác thực OTP" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontStyle=1;fontSize=12;align=left;spacingLeft=8;" vertex="1" parent="1">
           <mxGeometry x="40" y="150" width="720" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="useq_msg_0_0" value="1. POST /api/users/auth/register (Email, Password, FullName, Campus)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+        <mxCell id="useq_msg_0_0" value="1. POST /api/users/auth/register (Email, Password, FullName, Role=ALUMNI|STUDENT)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="140" y="200" as="sourcePoint" />
             <mxPoint x="420" y="200" as="targetPoint" />
@@ -91,13 +91,13 @@
             <mxPoint x="730" y="230" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="useq_msg_0_2" value="3. RegisterAsync(RegisterRequest)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+        <mxCell id="useq_msg_0_2" value="3. RegisterAsync -&gt; ResolveRoleAndAccountType (ALUMNI / STUDENT)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="730" y="260" as="sourcePoint" />
             <mxPoint x="1060" y="260" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="useq_msg_0_3" value="4. GetByEmailAsync(email) &amp; CreateAsync(User + UserProfile + VerificationToken 6-digit OTP)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+        <mxCell id="useq_msg_0_3" value="4. CreateAsync(User Role=ALUMNI|STUDENT + UserProfile + VerificationToken 6-digit OTP)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1060" y="290" as="sourcePoint" />
             <mxPoint x="1400" y="290" as="targetPoint" />
@@ -109,7 +109,7 @@
             <mxPoint x="1710" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="useq_msg_0_5" value="6. PublishAsync(&quot;user.registered.v1&quot;, { userId, email, otpCode })" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+        <mxCell id="useq_msg_0_5" value="6. SmtpEmailService.SendOtpEmailAsync (Gmail SMTP) &amp; PublishAsync(&quot;user.registered.v1&quot;)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1060" y="350" as="sourcePoint" />
             <mxPoint x="2030" y="350" as="targetPoint" />
@@ -127,7 +127,7 @@
             <mxPoint x="730" y="415" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="useq_msg_0_8" value="9. VerifyEmailAsync -&gt; UPDATE Users SET Status=&quot;Active&quot;, EmailVerified=1 + Issue JWT &amp; RefreshToken" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
+        <mxCell id="useq_msg_0_8" value="9. VerifyEmailAsync -&gt; UPDATE Users SET Status=&quot;Active&quot;, EmailVerified=1 + Issue JWT (Role=ALUMNI|STUDENT)" style="html=1;verticalAlign=bottom;endArrow=block;endFill=1;rounded=0;strokeColor=#000000;fontColor=#000000;fontSize=11;fontFamily=Courier New;labelBackgroundColor=#ffffff;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="730" y="445" as="sourcePoint" />
             <mxPoint x="1710" y="445" as="targetPoint" />
